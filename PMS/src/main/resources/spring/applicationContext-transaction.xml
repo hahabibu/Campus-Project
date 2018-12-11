@@ -39,6 +39,6 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd">
  	</tx:advice>
 	<!-- 定义切面 -->
  	<aop:config>
- 		<aop:advisor advice-ref="txAdvice" pointcut="execution (* com.guigu.instructional.system.service.impl.*.*(..))"/>
+ 		<aop:advisor advice-ref="txAdvice" pointcut="execution (* com.zstu.pms.system.service.impl.*.*(..))"/>
  	</aop:config>
 </beans>

@@ -19,12 +19,7 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 	
 	<!-- 定义扫描包的路径 -->
 	<context:component-scan 
-		base-package="com.guigu.instructional.system.controller,com.guigu.instructional.system.service.impl,
-		com.guigu.instructional.marketactive.controller,com.guigu.instructional.marketactive.service.impl,
-		com.guigu.instructional.recruitstudent.controller,com.guigu.instructional.recruitstudent.service.impl,
-		com.guigu.instructional.student.controller,com.guigu.instructional.student.service.impl,
-		com.guigu.instructional.classinfo.controller,com.guigu.instructional.classinfo.service.Impl,
-		com.guigu.instructional.finance.controller,com.guigu.instructional.finance.service.impl">
+		base-package="com.zstu.pms.user.controller,com.zstu.pms.user.service.impl">
 	
 	</context:component-scan>
 	
@@ -34,7 +29,7 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd">
     <!-- 配置视图解析器 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
     	<!-- 配置视图的前缀 -->
-    	<property name="prefix" value="/view/"></property>
+    	<property name="prefix" value="/pms/"></property>
     	<!-- 配置视图的后缀 -->
     	<property name="suffix" value=".jsp"></property>
     </bean>
@@ -45,7 +40,7 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd">
     	<property name="converters">
     		<list>
     			<!-- 定义日期转换器 -->
-    			<bean class="com.guigu.instructional.converter.CustomDateConverter"></bean>
+    			<bean class="com.zstu.pms.converter.CustomDateConverter"></bean>
     			<!-- 还可定义其他的转换器 -->
     		</list>
     	</property>

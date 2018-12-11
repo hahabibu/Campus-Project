@@ -5,7 +5,7 @@
  <configuration>
  
  	<typeAliases>
- 		 <package name="com.guigu.instructional.po"/>
+ 		 <package name="com.zstu.pms.model"/>
  	</typeAliases>
  	
 	  <!-- 加载映射文件  
