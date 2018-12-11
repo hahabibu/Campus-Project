@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zstu.pms.com.zstu.pms.mapper.AuthortyInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.zstu.pms.com.zstu.pms.model.AuthortyInfo" >
+    <id column="authorty_id" property="authortyId" jdbcType="VARCHAR" />
+    <result column="authorty_name" property="authortyName" jdbcType="VARCHAR" />
+    <result column="authorty_desc" property="authortyDesc" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="VARCHAR" />
+    <result column="authorty_url" property="authortyUrl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    authorty_id, authorty_name, authorty_desc, parent_id, authorty_url
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zstu.pms.com.zstu.pms.model.AuthortyInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from authorty_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from authorty_info
+    where authorty_id = #{authortyId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from authorty_info
+    where authorty_id = #{authortyId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zstu.pms.com.zstu.pms.model.AuthortyInfoExample" >
+    delete from authorty_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zstu.pms.com.zstu.pms.model.AuthortyInfo" >
+    insert into authorty_info (authorty_id, authorty_name, authorty_desc, 
+      parent_id, authorty_url)
+    values (#{authortyId,jdbcType=VARCHAR}, #{authortyName,jdbcType=VARCHAR}, #{authortyDesc,jdbcType=VARCHAR}, 
+      #{parentId,jdbcType=VARCHAR}, #{authortyUrl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zstu.pms.com.zstu.pms.model.AuthortyInfo" >
+    insert into authorty_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="authortyId != null" >
+        authorty_id,
+      </if>
+      <if test="authortyName != null" >
+        authorty_name,
+      </if>
+      <if test="authortyDesc != null" >
+        authorty_desc,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="authortyUrl != null" >
+        authorty_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="authortyId != null" >
+        #{authortyId,jdbcType=VARCHAR},
+      </if>
+      <if test="authortyName != null" >
+        #{authortyName,jdbcType=VARCHAR},
+      </if>
+      <if test="authortyDesc != null" >
+        #{authortyDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="authortyUrl != null" >
+        #{authortyUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zstu.pms.com.zstu.pms.model.AuthortyInfoExample" resultType="java.lang.Integer" >
+    select count(*) from authorty_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update authorty_info
+    <set >
+      <if test="record.authortyId != null" >
+        authorty_id = #{record.authortyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.authortyName != null" >
+        authorty_name = #{record.authortyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.authortyDesc != null" >
+        authorty_desc = #{record.authortyDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentId != null" >
+        parent_id = #{record.parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.authortyUrl != null" >
+        authorty_url = #{record.authortyUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update authorty_info
+    set authorty_id = #{record.authortyId,jdbcType=VARCHAR},
+      authorty_name = #{record.authortyName,jdbcType=VARCHAR},
+      authorty_desc = #{record.authortyDesc,jdbcType=VARCHAR},
+      parent_id = #{record.parentId,jdbcType=VARCHAR},
+      authorty_url = #{record.authortyUrl,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zstu.pms.com.zstu.pms.model.AuthortyInfo" >
+    update authorty_info
+    <set >
+      <if test="authortyName != null" >
+        authorty_name = #{authortyName,jdbcType=VARCHAR},
+      </if>
+      <if test="authortyDesc != null" >
+        authorty_desc = #{authortyDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="authortyUrl != null" >
+        authorty_url = #{authortyUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where authorty_id = #{authortyId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zstu.pms.com.zstu.pms.model.AuthortyInfo" >
+    update authorty_info
+    set authorty_name = #{authortyName,jdbcType=VARCHAR},
+      authorty_desc = #{authortyDesc,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=VARCHAR},
+      authorty_url = #{authortyUrl,jdbcType=VARCHAR}
+    where authorty_id = #{authortyId,jdbcType=VARCHAR}
+  </update>
+</mapper>
