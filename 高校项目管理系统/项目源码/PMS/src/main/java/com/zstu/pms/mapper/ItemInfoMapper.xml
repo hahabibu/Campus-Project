@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zstu.pms.mapper.ItemInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.zstu.pms.model.ItemInfo" >
+    <id column="item_id" property="itemId" jdbcType="VARCHAR" />
+    <result column="item_name" property="itemName" jdbcType="VARCHAR" />
+    <result column="item_class" property="itemClass" jdbcType="VARCHAR" />
+    <result column="principal" property="principal" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="profession" property="profession" jdbcType="VARCHAR" />
+    <result column="members" property="members" jdbcType="VARCHAR" />
+    <result column="commitment" property="commitment" jdbcType="VARCHAR" />
+    <result column="annex" property="annex" jdbcType="VARCHAR" />
+    <result column="del_tag" property="delTag" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    item_id, item_name, item_class, principal, phone, email, profession, members, commitment, 
+    annex, del_tag
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zstu.pms.model.ItemInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from item_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from item_info
+    where item_id = #{itemId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from item_info
+    where item_id = #{itemId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zstu.pms.model.ItemInfoExample" >
+    delete from item_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zstu.pms.model.ItemInfo" >
+    insert into item_info (item_id, item_name, item_class, 
+      principal, phone, email, 
+      profession, members, commitment, 
+      annex, del_tag)
+    values (#{itemId,jdbcType=VARCHAR}, #{itemName,jdbcType=VARCHAR}, #{itemClass,jdbcType=VARCHAR}, 
+      #{principal,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{profession,jdbcType=VARCHAR}, #{members,jdbcType=VARCHAR}, #{commitment,jdbcType=VARCHAR}, 
+      #{annex,jdbcType=VARCHAR}, #{delTag,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zstu.pms.model.ItemInfo" >
+    insert into item_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="itemId != null" >
+        item_id,
+      </if>
+      <if test="itemName != null" >
+        item_name,
+      </if>
+      <if test="itemClass != null" >
+        item_class,
+      </if>
+      <if test="principal != null" >
+        principal,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="profession != null" >
+        profession,
+      </if>
+      <if test="members != null" >
+        members,
+      </if>
+      <if test="commitment != null" >
+        commitment,
+      </if>
+      <if test="annex != null" >
+        annex,
+      </if>
+      <if test="delTag != null" >
+        del_tag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="itemId != null" >
+        #{itemId,jdbcType=VARCHAR},
+      </if>
+      <if test="itemName != null" >
+        #{itemName,jdbcType=VARCHAR},
+      </if>
+      <if test="itemClass != null" >
+        #{itemClass,jdbcType=VARCHAR},
+      </if>
+      <if test="principal != null" >
+        #{principal,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="profession != null" >
+        #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="members != null" >
+        #{members,jdbcType=VARCHAR},
+      </if>
+      <if test="commitment != null" >
+        #{commitment,jdbcType=VARCHAR},
+      </if>
+      <if test="annex != null" >
+        #{annex,jdbcType=VARCHAR},
+      </if>
+      <if test="delTag != null" >
+        #{delTag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zstu.pms.model.ItemInfoExample" resultType="java.lang.Integer" >
+    select count(*) from item_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update item_info
+    <set >
+      <if test="record.itemId != null" >
+        item_id = #{record.itemId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemName != null" >
+        item_name = #{record.itemName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemClass != null" >
+        item_class = #{record.itemClass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.principal != null" >
+        principal = #{record.principal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.profession != null" >
+        profession = #{record.profession,jdbcType=VARCHAR},
+      </if>
+      <if test="record.members != null" >
+        members = #{record.members,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commitment != null" >
+        commitment = #{record.commitment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.annex != null" >
+        annex = #{record.annex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delTag != null" >
+        del_tag = #{record.delTag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update item_info
+    set item_id = #{record.itemId,jdbcType=VARCHAR},
+      item_name = #{record.itemName,jdbcType=VARCHAR},
+      item_class = #{record.itemClass,jdbcType=VARCHAR},
+      principal = #{record.principal,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      profession = #{record.profession,jdbcType=VARCHAR},
+      members = #{record.members,jdbcType=VARCHAR},
+      commitment = #{record.commitment,jdbcType=VARCHAR},
+      annex = #{record.annex,jdbcType=VARCHAR},
+      del_tag = #{record.delTag,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zstu.pms.model.ItemInfo" >
+    update item_info
+    <set >
+      <if test="itemName != null" >
+        item_name = #{itemName,jdbcType=VARCHAR},
+      </if>
+      <if test="itemClass != null" >
+        item_class = #{itemClass,jdbcType=VARCHAR},
+      </if>
+      <if test="principal != null" >
+        principal = #{principal,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="profession != null" >
+        profession = #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="members != null" >
+        members = #{members,jdbcType=VARCHAR},
+      </if>
+      <if test="commitment != null" >
+        commitment = #{commitment,jdbcType=VARCHAR},
+      </if>
+      <if test="annex != null" >
+        annex = #{annex,jdbcType=VARCHAR},
+      </if>
+      <if test="delTag != null" >
+        del_tag = #{delTag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where item_id = #{itemId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zstu.pms.model.ItemInfo" >
+    update item_info
+    set item_name = #{itemName,jdbcType=VARCHAR},
+      item_class = #{itemClass,jdbcType=VARCHAR},
+      principal = #{principal,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      profession = #{profession,jdbcType=VARCHAR},
+      members = #{members,jdbcType=VARCHAR},
+      commitment = #{commitment,jdbcType=VARCHAR},
+      annex = #{annex,jdbcType=VARCHAR},
+      del_tag = #{delTag,jdbcType=VARCHAR}
+    where item_id = #{itemId,jdbcType=VARCHAR}
+  </update>
+</mapper>

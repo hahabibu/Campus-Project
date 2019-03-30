@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zstu.pms.mapper.RoleAuthortyInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.zstu.pms.model.RoleAuthortyInfo" >
+    <id column="role_authorty_id" property="roleAuthortyId" jdbcType="VARCHAR" />
+    <result column="role_id" property="roleId" jdbcType="VARCHAR" />
+    <result column="authorty_id" property="authortyId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    role_authorty_id, role_id, authorty_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zstu.pms.model.RoleAuthortyInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from role_authorty_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from role_authorty_info
+    where role_authorty_id = #{roleAuthortyId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from role_authorty_info
+    where role_authorty_id = #{roleAuthortyId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zstu.pms.model.RoleAuthortyInfoExample" >
+    delete from role_authorty_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zstu.pms.model.RoleAuthortyInfo" >
+    insert into role_authorty_info (role_authorty_id, role_id, authorty_id
+      )
+    values (#{roleAuthortyId,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}, #{authortyId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zstu.pms.model.RoleAuthortyInfo" >
+    insert into role_authorty_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="roleAuthortyId != null" >
+        role_authorty_id,
+      </if>
+      <if test="roleId != null" >
+        role_id,
+      </if>
+      <if test="authortyId != null" >
+        authorty_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="roleAuthortyId != null" >
+        #{roleAuthortyId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="authortyId != null" >
+        #{authortyId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zstu.pms.model.RoleAuthortyInfoExample" resultType="java.lang.Integer" >
+    select count(*) from role_authorty_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update role_authorty_info
+    <set >
+      <if test="record.roleAuthortyId != null" >
+        role_authorty_id = #{record.roleAuthortyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roleId != null" >
+        role_id = #{record.roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.authortyId != null" >
+        authorty_id = #{record.authortyId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update role_authorty_info
+    set role_authorty_id = #{record.roleAuthortyId,jdbcType=VARCHAR},
+      role_id = #{record.roleId,jdbcType=VARCHAR},
+      authorty_id = #{record.authortyId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zstu.pms.model.RoleAuthortyInfo" >
+    update role_authorty_info
+    <set >
+      <if test="roleId != null" >
+        role_id = #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="authortyId != null" >
+        authorty_id = #{authortyId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where role_authorty_id = #{roleAuthortyId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zstu.pms.model.RoleAuthortyInfo" >
+    update role_authorty_info
+    set role_id = #{roleId,jdbcType=VARCHAR},
+      authorty_id = #{authortyId,jdbcType=VARCHAR}
+    where role_authorty_id = #{roleAuthortyId,jdbcType=VARCHAR}
+  </update>
+</mapper>
